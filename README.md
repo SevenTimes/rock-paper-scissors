@@ -1,3 +1,3 @@
 # rock-paper-scissors
 
-[https://seventimes.github.io/rock-paper-scissors/](Live Demo)
+[Live Demo](https://seventimes.github.io/rock-paper-scissors/)
