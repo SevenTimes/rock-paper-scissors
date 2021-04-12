@@ -1,8 +1,39 @@
 const choices = ['ROCK', 'PAPER', 'SCISSORS'];
 const btns = Array.from(document.querySelectorAll('button'));
+const result = document.querySelector('.result');
+const scoreBoard = document.querySelector('.score-board');
+let cpuScore = 0;
+let playerScore = 0;
+
+function reset() {
+  cpuScore = 0;
+  playerScore = 0;
+}
 
 function computerPlay() {
   return choices[Math.floor(Math.random() * choices.length)];
+}
+
+function score(a) {
+  result.textContent = a;
+  switch (a) {
+    case 'Win':
+      playerScore++;
+      break;
+    case 'Lose':
+      cpuScore++;
+      break;
+    default:
+      break;
+  }
+  if (playerScore >= 5) {
+    alert("You've won!");
+    reset();
+  } else if (cpuScore >= 5) {
+    alert("You've lost!");
+    reset();
+  }
+  scoreBoard.textContent = `SCORE: ${playerScore} - ${cpuScore}`;
 }
 
 btns.forEach((btn) =>
@@ -10,48 +41,25 @@ btns.forEach((btn) =>
     let cpuChoice = computerPlay();
     let playerChoice = btn.id;
     if (playerChoice === cpuChoice) {
-      console.log('Tied');
+      score('Tie');
     } else if (playerChoice === 'ROCK') {
       if (cpuChoice === 'SCISSORS') {
-        console.log('You Win');
+        score('Win');
       } else {
-        console.log('You Lose');
+        score('Lose');
       }
     } else if (playerChoice === 'PAPER') {
       if (cpuChoice === 'ROCK') {
-        console.log('You Win');
+        score('Win');
       } else {
-        console.log('You Lose');
+        score('Lose');
       }
     } else if (playerChoice === 'SCISSORS') {
       if (cpuChoice === 'PAPER') {
-        console.log('You Win');
+        score('Win');
       } else {
-        console.log('You Lose');
+        score('Lose');
       }
     }
   })
 );
-
-// function playRound(playerSelection, cpuChoice) {
-//   let playerChoice = playerSelection.toUpperCase();
-//   if (playerChoice === cpuChoice) {
-//     return 'Tied';
-//   } else if (playerChoice === 'ROCK') {
-//     if (cpuChoice === 'SCISSORS') {
-//       return 'You win';
-//     }
-//     return 'You lose';
-//   } else if (playerChoice === 'PAPER') {
-//     if (cpuChoice === 'ROCK') {
-//       return 'You win';
-//     }
-//     return 'You lose';
-//   } else if (playerChoice === 'SCISSORS') {
-//     if (cpuChoice === 'PAPER') {
-//       return 'You win';
-//     }
-//     return 'You lose';
-//   }
-//   return 'Please insert correct choice';
-// }
